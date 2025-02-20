@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/poppins": "^5.1.1",
+    "@fontsource/roboto": "^5.1.1",
     "framer-motion": "^12.4.5",
     "next": "15.1.7",
     "react": "^19.0.0",
