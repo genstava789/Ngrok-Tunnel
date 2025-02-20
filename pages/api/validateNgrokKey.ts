@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-<<<<<<< HEAD
-=======
 type NgrokTunnel = {
   proto: string;
   public_url: string;
@@ -11,7 +9,6 @@ type NgrokResponse = {
   tunnels: NgrokTunnel[];
 };
 
->>>>>>> e54c6302027a3a2694c8911bb31f565efd06c57e
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -33,17 +30,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (!response.ok) {
       const errorText = await response.text();
-<<<<<<< HEAD
-      return res.status(response.status).json({ error: `Invalid Ngrok API key: ${errorText}` });
-    }
-
-    res.status(200).json({ message: 'API key is valid' });
-  } catch (error) {
-    console.error('Error validating Ngrok API key:', error);
-    res.status(500).json({ error: 'Failed to validate Ngrok API key' });
-  }
-}
-=======
       return res.status(response.status).json({ error: `Failed to fetch Ngrok tunnels: ${errorText}` });
     }
 
@@ -61,4 +47,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(500).json({ error: 'Failed to fetch Ngrok tunnels' });
   }
 }
->>>>>>> e54c6302027a3a2694c8911bb31f565efd06c57e
