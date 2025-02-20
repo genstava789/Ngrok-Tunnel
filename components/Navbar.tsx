@@ -4,7 +4,7 @@ import '@fontsource/roboto'; // Importing a Fontsource font (e.g., Roboto)
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://ngrok-tunnel-5kb7dt5r5-ryoo1s-projects.vercel.app";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -15,13 +15,13 @@ const Navbar = () => {
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href={`${baseUrl}/`} className="text-xl font-bold hover:text-gray-300">
-              Ngrok Fetch
+            <Link href={`${baseUrl}/`}>
+              <a className="text-xl font-bold hover:text-gray-300">Ngrok Fetch</a>
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <Link href={`${baseUrl}/`} className="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
-              Home
+            <Link href={`${baseUrl}/`}>
+              <a className="hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
             </Link>
           </div>
           <div className="-mr-2 flex md:hidden">
@@ -46,8 +46,8 @@ const Navbar = () => {
 
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`} id="mobile-menu">
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link href={`${baseUrl}/`} className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium">
-            Home
+          <Link href={`${baseUrl}/`}>
+            <a className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
           </Link>
         </div>
       </div>
