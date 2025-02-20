@@ -1,4 +1,4 @@
-// File: C:\Users\administrator\Documents\my-app\app\layout.tsx
+// File: C:\Users\administrator\Documents\ngrok\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

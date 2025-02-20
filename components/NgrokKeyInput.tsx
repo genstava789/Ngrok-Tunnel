@@ -66,42 +66,42 @@ const NgrokKeyInput: React.FC<NgrokKeyInputProps> = ({ setApiKey }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Enter Ngrok API Key</h2>
-      <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder="Enter Ngrok API Key"
-          className="border p-2 rounded-lg flex-grow w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow disabled:opacity-50"
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 font-Poppins">Enter Ngrok API Key</h2>
+    <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 w-full max-w-2xl mx-auto">
+      <input
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+        placeholder="Enter Ngrok API Key"
+        className="border p-2 rounded-lg w-full sm:w-64 md:w-80 lg:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow disabled:opacity-50 flex-1"
+        disabled={loading || keyStored}
+      />
+      <div className="flex gap-2 w-full sm:w-auto flex-wrap">
+        <button
+          onClick={handleSaveApiKey}
+          className={`px-4 py-2 bg-green-500 text-white rounded-md font-medium transition-all focus:outline-none hover:bg-green-600 ${
+            loading || keyStored ? 'bg-green-300 cursor-not-allowed' : ''
+          }`}
           disabled={loading || keyStored}
-        />
-        <div className="flex space-x-2 w-full sm:w-auto">
+        >
+          {loading ? 'Validating...' : 'Save'}
+        </button>
+        {keyStored && (
           <button
-            onClick={handleSaveApiKey}
-            className={`px-4 py-2 w-full sm:w-auto text-sm font-semibold text-white rounded-md transition-all focus:outline-none hover:shadow-lg ${
-              loading || keyStored ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'
-            }`}
-            disabled={loading || keyStored}
+            onClick={handleDeleteApiKey}
+            className="px-4 py-2 bg-red-500 text-white rounded-md font-medium transition-all focus:outline-none hover:bg-red-600"
           >
-            {loading ? 'Validating...' : 'Save'}
+            Delete
           </button>
-          {keyStored && (
-            <button
-              onClick={handleDeleteApiKey}
-              className="px-4 py-2 w-full sm:w-auto text-sm font-semibold text-white bg-red-500 rounded-md transition-all focus:outline-none hover:bg-red-600 hover:shadow-lg"
-            >
-              Delete
-            </button>
-          )}
-        </div>
+        )}
       </div>
-      {error && (
-        <div className="mt-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded-md">
-          {error}
-        </div>
-      )}
     </div>
+    {error && (
+      <div className="mt-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded-md text-center">
+        {error}
+      </div>
+    )}
+  </div>
   );
 };
 
