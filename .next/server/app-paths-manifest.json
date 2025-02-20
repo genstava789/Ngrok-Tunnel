@@ -1,3 +1,5 @@
 {
+  "/api/ngrok": "app/api/ngrok.js",
+  "/api/validateNgrokKey": "app/api/validateNgrokKey.js",
   "/page": "app/page.js"
 }

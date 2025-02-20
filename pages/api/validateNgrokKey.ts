@@ -1,23 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type NgrokTunnel = {
-  proto: string;
-  public_url: string;
-};
-
-type NgrokResponse = {
-  tunnels: NgrokTunnel[];
-};
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
-    if (req.method === 'OPTIONS') {
-      return res.status(200).end();
-    }
-  
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
   const { apiKey } = req.body;
 
   if (!apiKey) {
@@ -34,20 +21,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (!response.ok) {
       const errorText = await response.text();
-      return res.status(response.status).json({ error: `Failed to fetch Ngrok tunnels: ${errorText}` });
+      return res.status(response.status).json({ error: `Invalid Ngrok API key: ${errorText}` });
     }
 
-    const data: NgrokResponse = await response.json();
-    const tcpTunnel = data.tunnels.find(tunnel => tunnel.proto === 'tcp');
-    const tcpUrl = tcpTunnel ? tcpTunnel.public_url.replace('tcp://', '') : null;
-
-    if (!tcpUrl) {
-      return res.status(404).json({ error: 'No TCP tunnel found' });
-    }
-
-    res.status(200).json({ tcpUrl });
+    res.status(200).json({ message: 'API key is valid' });
   } catch (error) {
-    console.error('Error Fetching Ngrok Tunnels:', error);
-    res.status(500).json({ error: 'Failed to fetch Ngrok tunnels' });
+    console.error('Error validating Ngrok API key:', error);
+    res.status(500).json({ error: 'Failed to validate Ngrok API key' });
   }
 }
